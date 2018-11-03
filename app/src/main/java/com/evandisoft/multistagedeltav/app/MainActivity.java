@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
-        // TODO I can't remember this stuff
+        
         this.rocketNameAutoTextAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
         this.stageNameAutoTextAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
 
