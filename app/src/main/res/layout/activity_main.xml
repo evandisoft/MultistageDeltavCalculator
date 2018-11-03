@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textNoSuggestions"
+            android:hint="@string/name_of_rocket"
             android:selectAllOnFocus="true" />
 
         <LinearLayout
@@ -26,36 +26,40 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/newButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onNewButtonClicked"
-                android:text="New" />
+                android:text="@string/newButtonText" />
 
             <Button
                 android:id="@+id/clearAllStagesButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClearClicked"
-                android:text="Clear" />
+                android:text="@string/clearButtonText" />
 
             <Button
                 android:id="@+id/saveRocketButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onSaveRocketClicked"
-                android:text="Save" />
+                android:text="@string/saveButtonText" />
 
             <Button
                 android:id="@+id/loadRocketButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onLoadRocketClicked"
-                android:text="Load" />
+                android:text="@string/loadButtonText" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,12 +68,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/addStageButton"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:onClick="onAddStageClick"
-                android:text="+Stage" />
+                android:text="@string/addStageButtonText" />
 
             <RadioGroup
                 android:id="@+id/addStageGroup"
@@ -86,7 +91,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="false"
                     android:onClick="clearAddFocus"
-                    android:text="Beg" />
+                    android:text="@string/addBeginningOptionText" />
 
                 <RadioButton
                     android:id="@+id/addEndRadioButton"
@@ -97,7 +102,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="false"
                     android:onClick="clearAddFocus"
-                    android:text="End" />
+                    android:text="@string/addEndOptionText" />
 
                 <RadioButton
                     android:id="@+id/addIndexRadioButton"
@@ -110,12 +115,15 @@
 
             <EditText
                 android:id="@+id/addIndexTextField"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:editable="true"
                 android:ems="10"
-                android:inputType="numberSigned" />
+                android:focusable="true"
+                android:hint="@string/addStageAtIndexHint"
+                android:inputType="numberSigned"
+                android:selectAllOnFocus="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,9 +134,8 @@
 
             <ExpandableListView
                 android:id="@+id/expandableListView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 

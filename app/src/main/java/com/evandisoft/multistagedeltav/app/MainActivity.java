@@ -1,6 +1,7 @@
 package com.evandisoft.multistagedeltav.app;
 
 import android.app.Activity;
+import android.support.v4.view.accessibility.AccessibilityEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView autoText;
     ExpandableListView expandableListView;
     Rocket rocket;
-    TextView rocketNameTextField;
+    AutoCompleteTextView rocketNameTextField;
     RocketStagesAdapter rocketStagesAdapter;
     ArrayAdapter<String> rocketNameAutoTextAdapter;
     ArrayAdapter<String> stageNameAutoTextAdapter;
@@ -35,22 +36,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        rocketNameTextField = findViewById(R.id.rocketNameTextField);
         
-        this.rocketNameAutoTextAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
-        this.stageNameAutoTextAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+        this.rocketNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
+
+        this.autoText = rocketNameTextField;
+        this.autoText.setAdapter(this.rocketNameAutoTextAdapter);
+        this.autoText.setThreshold(1);
+
+        this.stageNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
         this.rocket = new Rocket();
-        this.expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        this.rocketNameTextField = (TextView) findViewById(R.id.rocketNameTextField);
+        this.expandableListView = findViewById(R.id.expandableListView);
+        this.expandableListView.setDescendantFocusability(AccessibilityEventCompat.TYPE_GESTURE_DETECTION_START);
+
         this.rocketNameTextField.addTextChangedListener(this.rocket.nameWatcher);
 
         this.rocketStagesAdapter = new RocketStagesAdapter(this, this.rocket);
         this.expandableListView.setAdapter(this.rocketStagesAdapter);
-        this.addStageGroup = (RadioGroup) findViewById(R.id.addStageGroup);
-        this.addIndexTextField = (TextView) findViewById(R.id.addIndexTextField);
+        this.addStageGroup = findViewById(R.id.addStageGroup);
+        this.addIndexTextField = findViewById(R.id.addIndexTextField);
         this.addIndexTextField.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 MainActivity.this.addStageGroup.check(R.id.addIndexRadioButton);
+                v.performClick();
                 return false;
             }
         });
@@ -90,6 +99,29 @@ public class MainActivity extends AppCompatActivity {
         this.rocketStagesAdapter.notifyDataSetChanged();
     }
 
+    protected void onStart() {
+        super.onStart();
+        autoload();
+    }
+
+    protected void onStop() {
+        super.onStop();
+        autosave();
+    }
+
+    public void autosave() {
+        FileIO.writeStringToFile(this, "autosave.json", this.rocket.toString());
+    }
+
+    public void autoload() {
+        String string = FileIO.readStringFromFile(this, "autosave.json");
+        if (string != null) {
+            this.rocket.fromString(string);
+            this.rocketStagesAdapter.notifyDataSetChanged();
+        }
+        this.rocketNameTextField.setText(this.rocket.name);
+    }
+
     public void clearAddFocus(View view) {
         this.addIndexTextField.clearFocus();
     }
@@ -120,13 +152,13 @@ public class MainActivity extends AppCompatActivity {
     public void onNewButtonClicked(View view) {
         this.rocket.clear();
         this.rocket.add(new RocketStage());
-        this.rocketNameTextField.setText("Default Rocket Name");
+        this.rocketNameTextField.setText(getString(R.string.DefaultRocketName));
         this.rocketStagesAdapter.notifyDataSetChanged();
     }
 
     public void loadAppFiles() {
         this.appFiles = FileIO.getAppFiles(this);
-        // TODO Must fix this when I figure out what this is about
+
         this.stageNameAutoTextAdapter.clear();
         this.rocketNameAutoTextAdapter.clear();
         for (File file : this.appFiles) {
