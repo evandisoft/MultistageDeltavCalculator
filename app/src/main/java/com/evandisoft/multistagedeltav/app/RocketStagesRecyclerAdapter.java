@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.evandisoft.multistagedeltav.R;
@@ -30,7 +31,7 @@ class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        // TODO set the textview in viewHolder values properly with respect to the ith rocket stage
+        ((RocketStageViewHolder)viewHolder).set(this,this.rocket,i);
     }
 
     @Override
