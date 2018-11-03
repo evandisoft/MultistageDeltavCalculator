@@ -20,15 +20,9 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup addStageGroup;
     File[] appFiles;
     AutoCompleteTextView autoText;
-    TextView deltaVTextView;
-    TextView dryMassTextField;
     ExpandableListView expandableListView;
-    TextView fullMassTextField;
-    TextView ispTextField;
     Rocket rocket;
-    ArrayAdapter<String> rocketNameAutoTextAdapter;
     TextView rocketNameTextField;
-    ArrayAdapter<String> stageNameAutoTextAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,4 +88,18 @@ public class MainActivity extends AppCompatActivity {
         // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
         // TODO not sure what this does anymore - loadAppFiles();
     }
+
+//    public void loadAppFiles() {
+//        this.appFiles = FileIO.getAppFiles(this);
+//        this.stageNameAutoTextAdapter.clear();
+//        this.rocketNameAutoTextAdapter.clear();
+//        for (File file : this.appFiles) {
+//            String name = file.getName().replace(".json", "");
+//            if (name.startsWith("stage_")) {
+//                this.stageNameAutoTextAdapter.add(name.replace("stage_", ""));
+//            } else if (name.startsWith("rocket_")) {
+//                this.rocketNameAutoTextAdapter.add(name.replace("rocket_", ""));
+//            }
+//        }
+//    }
 }
