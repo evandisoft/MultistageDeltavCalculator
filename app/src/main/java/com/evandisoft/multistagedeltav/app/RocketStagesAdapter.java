@@ -31,7 +31,7 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
         this.context = mainActivity;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.rocket = rocket;
-        rocket.rsa = this;
+        //rocket.rsa = this;
     }
 
     @Override
@@ -118,9 +118,9 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
 
             childViewHolder = new ChildViewHolder(this, null);
             childViewHolder.rocketStage = rocketStage;
-            childViewHolder.name = (TextView) convertView.findViewById(R.id.stageNameTextField);
+            childViewHolder.name = (TextView) convertView.findViewById(R.id.stageNameAutoComplete);
 
-            ((AutoCompleteTextView) convertView.findViewById(R.id.stageNameTextField)).setAdapter(((MainActivity) this.context).stageNameAutoTextAdapter);
+            ((AutoCompleteTextView) convertView.findViewById(R.id.stageNameAutoComplete)).setAdapter(((MainActivity) this.context).stageNameAutoTextAdapter);
             childViewHolder.fullMass = (TextView) convertView.findViewById(R.id.fullMassTextField);
             childViewHolder.dryMass = (TextView) convertView.findViewById(R.id.dryMassTextField);
             childViewHolder.isp = (TextView) convertView.findViewById(R.id.ispTextField);

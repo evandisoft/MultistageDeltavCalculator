@@ -31,16 +31,19 @@ public class MainActivity extends AppCompatActivity {
     //RocketStagesAdapter rocketStagesAdapter;
     ArrayAdapter<String> rocketNameAutoTextAdapter;
     ArrayAdapter<String> stageNameAutoTextAdapter;
+    App app;
+    boolean firstStartup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+        firstStartup=!App.instanciated();
+        app=App.getInstance();
+
         rocketNameTextField = findViewById(R.id.rocketNameTextField);
-
-
-        
         this.rocketNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
         this.autoText = rocketNameTextField;
@@ -49,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         this.stageNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
-        this.rocket = new Rocket();
+        this.rocket = app.rocket;
 
-        rocketStagesRecyclerAdapter=new RocketStagesRecyclerAdapter(rocket);
+        rocketStagesRecyclerAdapter=new RocketStagesRecyclerAdapter(rocket,this);
         rocketStagesRecyclerLayoutManager =new LinearLayoutManager(this);
         rocketStagesRecyclerView =findViewById(R.id.rocketStagesRecyclerView);
         rocketStagesRecyclerView.setLayoutManager(rocketStagesRecyclerLayoutManager);
@@ -72,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        if(firstStartup){
+            autoload();
+        }
 
         loadAppFiles();
     }
@@ -110,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-        autoload();
+        rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
     protected void onStop() {

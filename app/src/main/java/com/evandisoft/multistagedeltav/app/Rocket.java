@@ -15,8 +15,8 @@ class Rocket extends ArrayList<RocketStage> {
     private double mass;
     public String name;
     public TextWatcher nameWatcher;
-    public RocketStagesAdapter rsa;
-    public RocketStagesRecyclerAdapter rocketStagesRecyclerAdapter;
+    //public RocketStagesAdapter rsa;
+    //public RocketStagesRecyclerAdapter rocketStagesRecyclerAdapter;
 
     public double getDeltaV() {
         return this.deltaV;

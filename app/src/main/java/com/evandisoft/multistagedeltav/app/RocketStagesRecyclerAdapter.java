@@ -5,16 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.evandisoft.multistagedeltav.R;
 
 class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView.Adapter {
+    MainActivity mainActivity;
     Rocket rocket;
 
-    public RocketStagesRecyclerAdapter(Rocket rocket) {
+    public RocketStagesRecyclerAdapter(Rocket rocket,MainActivity mainActivity) {
         this.rocket=rocket;
+        this.mainActivity=mainActivity;
     }
 
     @NonNull
@@ -30,7 +30,7 @@ class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ((RocketStageViewHolder)viewHolder).set(this,this.rocket,i);
+        ((RocketStageViewHolder)viewHolder).set(this,mainActivity,this.rocket,i);
     }
 
     @Override

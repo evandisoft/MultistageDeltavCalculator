@@ -71,11 +71,11 @@
                 android:ems="4"
                 android:gravity="end"
                 android:inputType="numberDecimal"
-                android:nextFocusLeft="@+id/stageNameTextField"
-                android:nextFocusRight="@+id/stageNameTextField"
-                android:nextFocusUp="@+id/stageNameTextField"
-                android:nextFocusDown="@+id/stageNameTextField"
-                android:nextFocusForward="@+id/stageNameTextField"
+                android:nextFocusLeft="@+id/stageNameAutoComplete"
+                android:nextFocusRight="@+id/stageNameAutoComplete"
+                android:nextFocusUp="@+id/stageNameAutoComplete"
+                android:nextFocusDown="@+id/stageNameAutoComplete"
+                android:nextFocusForward="@+id/stageNameAutoComplete"
                 android:selectAllOnFocus="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                  />
@@ -118,7 +118,7 @@
         android:orientation="vertical">
 
         <AutoCompleteTextView
-            android:id="@+id/stageNameTextField"
+            android:id="@+id/stageNameAutoComplete"
             android:hint="@string/stage_name_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
