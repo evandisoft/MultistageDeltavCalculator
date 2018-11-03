@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // TODO I can't remember this stuff
-        this.rocketNameAutoTextAdapter = new ArrayAdapter<String>(this,R.layout.activity_main);
-        this.stageNameAutoTextAdapter = new ArrayAdapter<String>(this,R.layout.rocket_stage_group_view);
+        this.rocketNameAutoTextAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+        this.stageNameAutoTextAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
 
         this.rocket = new Rocket();
         this.expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
