@@ -3,10 +3,32 @@ package com.evandisoft.multistagedeltav.app;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ExpandableListView;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import com.evandisoft.saneandroidutils.lib.FileIO;
 
 import com.evandisoft.multistagedeltav.R;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
+    TextView addIndexTextField;
+    RadioGroup addStageGroup;
+    File[] appFiles;
+    AutoCompleteTextView autoText;
+    TextView deltaVTextView;
+    TextView dryMassTextField;
+    ExpandableListView expandableListView;
+    TextView fullMassTextField;
+    TextView ispTextField;
+    Rocket rocket;
+    ArrayAdapter<String> rocketNameAutoTextAdapter;
+    TextView rocketNameTextField;
+    ArrayAdapter<String> stageNameAutoTextAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     public void onUpdateButtonClicked(View view) {
         try {
             this.rocket.calculateRocketCharacteristics();
-            this.rocketStagesAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
         }
-        this.rocketStagesAdapter.notifyDataSetChanged();
+        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
     }
 
     public void clearAddFocus(View view) {
@@ -57,20 +78,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClearClicked(View view) {
         this.rocket.clear();
-        this.rocketStagesAdapter.notifyDataSetChanged();
+        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
     }
 
     public void onLoadRocketClicked(View view) {
         String string = FileIO.readStringFromFile(this, "rocket_" + this.rocket.name + ".json");
         if (string != null) {
             this.rocket.fromString(string);
-            this.rocketStagesAdapter.notifyDataSetChanged();
+            // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
         }
     }
 
     public void onSaveRocketClicked(View view) {
         FileIO.writeStringToFile(this, "rocket_" + this.rocket.name + ".json", this.rocket.toString());
-        this.rocketStagesAdapter.notifyDataSetChanged();
-        loadAppFiles();
+        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
+        // TODO not sure what this does anymore - loadAppFiles();
     }
 }

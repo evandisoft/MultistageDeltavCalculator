@@ -65,13 +65,14 @@
                 android:text="+Stage" />
 
             <RadioGroup
+                android:id="@+id/addStageGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/addStartRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -79,14 +80,14 @@
                     android:text="Beg" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/addEndRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="End" />
 
                 <RadioButton
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/addIndexRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
