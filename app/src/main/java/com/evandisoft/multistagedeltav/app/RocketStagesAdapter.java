@@ -110,6 +110,7 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
         final RocketStage rocketStage = (RocketStage) this.rocket.get(groupPosition);
         if (convertView == null) {
             convertView = this.layoutInflater.inflate(R.layout.rocket_stage_view, parent, false);
+
             childViewHolder = new ChildViewHolder(this, null);
             childViewHolder.rocketStage = rocketStage;
             childViewHolder.name = (TextView) convertView.findViewById(R.id.stageNameTextField);

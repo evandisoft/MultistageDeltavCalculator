@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.rocket = new Rocket();
         this.expandableListView = findViewById(R.id.expandableListView);
-        this.expandableListView.setDescendantFocusability(AccessibilityEventCompat.TYPE_GESTURE_DETECTION_START);
+        //this.expandableListView.setDescendantFocusability();
 
         this.rocketNameTextField.addTextChangedListener(this.rocket.nameWatcher);
 
@@ -169,5 +169,9 @@ public class MainActivity extends AppCompatActivity {
                 this.rocketNameAutoTextAdapter.add(name.replace("rocket_", ""));
             }
         }
+    }
+
+    public void testFun33(View view) {
+        int a=3;
     }
 }
