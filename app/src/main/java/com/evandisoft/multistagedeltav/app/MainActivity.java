@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Rocket rocket;
     TextView rocketNameTextField;
     RocketStagesAdapter rocketStagesAdapter;
-    //ArrayAdapter<String> rocketNameAutoTextAdapter;
-    //ArrayAdapter<String> stageNameAutoTextAdapter;
+    ArrayAdapter<String> rocketNameAutoTextAdapter;
+    ArrayAdapter<String> stageNameAutoTextAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // TODO I can't remember this stuff
-        //this.rocketNameAutoTextAdapter = new ArrayAdapter<String>(this,);
-        //this.stageNameAutoTextAdapter = new ArrayAdapter<String>(this, );
+        this.rocketNameAutoTextAdapter = new ArrayAdapter<String>(this,R.layout.activity_main);
+        this.stageNameAutoTextAdapter = new ArrayAdapter<String>(this,R.layout.rocket_stage_group_view);
 
         this.rocket = new Rocket();
         this.expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // TODO Not sure yet entirely what this did
-        //loadAppFiles();
+        loadAppFiles();
     }
 
     public void onUpdateButtonClicked(View view) {
@@ -99,42 +98,42 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClearClicked(View view) {
         this.rocket.clear();
-        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
+        this.rocketStagesAdapter.notifyDataSetChanged();
     }
 
     public void onLoadRocketClicked(View view) {
         String string = FileIO.readStringFromFile(this, "rocket_" + this.rocket.name + ".json");
         if (string != null) {
             this.rocket.fromString(string);
-            // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
+            this.rocketStagesAdapter.notifyDataSetChanged();
         }
     }
 
     public void onSaveRocketClicked(View view) {
         FileIO.writeStringToFile(this, "rocket_" + this.rocket.name + ".json", this.rocket.toString());
-        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
-        // TODO not sure what this does anymore - loadAppFiles();
+        this.rocketStagesAdapter.notifyDataSetChanged();
+        loadAppFiles();
     }
 
     public void onNewButtonClicked(View view) {
         this.rocket.clear();
         this.rocket.add(new RocketStage());
         this.rocketNameTextField.setText("Default Rocket Name");
-        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
+        this.rocketStagesAdapter.notifyDataSetChanged();
     }
 
-//    public void loadAppFiles() {
-//        this.appFiles = FileIO.getAppFiles(this);
-//        // TODO Must fix this when I figure out what this is about
-//        //this.stageNameAutoTextAdapter.clear();
-//        //this.rocketNameAutoTextAdapter.clear();
-//        for (File file : this.appFiles) {
-//            String name = file.getName().replace(".json", "");
-//            if (name.startsWith("stage_")) {
-//                this.stageNameAutoTextAdapter.add(name.replace("stage_", ""));
-//            } else if (name.startsWith("rocket_")) {
-//                this.rocketNameAutoTextAdapter.add(name.replace("rocket_", ""));
-//            }
-//        }
-//    }
+    public void loadAppFiles() {
+        this.appFiles = FileIO.getAppFiles(this);
+        // TODO Must fix this when I figure out what this is about
+        this.stageNameAutoTextAdapter.clear();
+        this.rocketNameAutoTextAdapter.clear();
+        for (File file : this.appFiles) {
+            String name = file.getName().replace(".json", "");
+            if (name.startsWith("stage_")) {
+                this.stageNameAutoTextAdapter.add(name.replace("stage_", ""));
+            } else if (name.startsWith("rocket_")) {
+                this.rocketNameAutoTextAdapter.add(name.replace("rocket_", ""));
+            }
+        }
+    }
 }

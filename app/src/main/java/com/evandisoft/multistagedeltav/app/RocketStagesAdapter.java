@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.evandisoft.multistagedeltav.R;
+import com.evandisoft.saneandroidutils.lib.FileIO;
 
 import java.text.DecimalFormat;
 
@@ -85,7 +86,7 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    // The tool used to rebuild the source didn't seem to generate this properly
+    // The tool used to rebuild the source didn't seem to generate this completely
     private class ChildViewHolder {
         public TextView deltaV;
         public TextView dryMass;
@@ -112,8 +113,8 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
             childViewHolder = new ChildViewHolder(this, null);
             childViewHolder.rocketStage = rocketStage;
             childViewHolder.name = (TextView) convertView.findViewById(R.id.stageNameTextField);
-            //TODO fix this
-            // ((AutoCompleteTextView) convertView.findViewById(R.id.stageNameTextField)).setAdapter(((MainActivity) this.context).stageNameAutoTextAdapter);
+
+            ((AutoCompleteTextView) convertView.findViewById(R.id.stageNameTextField)).setAdapter(((MainActivity) this.context).stageNameAutoTextAdapter);
             childViewHolder.fullMass = (TextView) convertView.findViewById(R.id.fullMassTextField);
             childViewHolder.dryMass = (TextView) convertView.findViewById(R.id.dryMassTextField);
             childViewHolder.isp = (TextView) convertView.findViewById(R.id.ispTextField);
@@ -150,26 +151,62 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
         childViewHolder.rocketStage = rocketStage;
 
         // TODO Fix these buttons
-//        convertView.findViewById(R.id.stageClearButton).setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                RocketStagesAdapter.this.clearRocketStage((RocketStage) RocketStagesAdapter.this.rocket.get(groupPosition));
-//            }
-//        });
-//        convertView.findViewById(R.id.stageSaveButton).setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                RocketStagesAdapter.this.saveRocketStage((RocketStage) RocketStagesAdapter.this.rocket.get(groupPosition));
-//            }
-//        });
-//        convertView.findViewById(R.id.stageLoadButton).setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                RocketStagesAdapter.this.loadRocketStage(rocketStage);
-//            }
-//        });
+        final int finalGroupPosition=groupPosition;
+        convertView.findViewById(R.id.stageClearButton).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RocketStagesAdapter.this.clearRocketStage((RocketStage) RocketStagesAdapter.this.rocket.get(finalGroupPosition));
+            }
+        });
+        convertView.findViewById(R.id.stageSaveButton).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RocketStagesAdapter.this.saveRocketStage((RocketStage) RocketStagesAdapter.this.rocket.get(finalGroupPosition));
+            }
+        });
+        convertView.findViewById(R.id.stageLoadButton).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RocketStagesAdapter.this.loadRocketStage(rocketStage);
+            }
+        });
+
         return convertView;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.rocket.isEmpty();
+    }
+
+    public void saveRocketStage(RocketStage rocketStage) {
+        FileIO.writeStringToFile(this.context, "stage_" + rocketStage.name + ".json", rocketStage.toString());
+        this.rocket.calculateRocketCharacteristics();
+        notifyDataSetChanged();
+        ((MainActivity) this.context).loadAppFiles();
+    }
+
+    public void loadRocketStage(RocketStage rocketStage) {
+        String string = FileIO.readStringFromFile(this.context, "stage_" + rocketStage.name + ".json");
+        if (string != null) {
+            rocketStage.fromString(string);
+            this.rocket.calculateRocketCharacteristics();
+            notifyDataSetChanged();
+        }
+    }
+
+    public void clearRocketStage(RocketStage rocketStage) {
+        String name = rocketStage.name;
+        rocketStage.copyValues(new RocketStage());
+        rocketStage.name = name;
+        this.rocket.calculateRocketCharacteristics();
+        notifyDataSetChanged();
     }
 }
