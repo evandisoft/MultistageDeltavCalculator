@@ -2,6 +2,7 @@ package com.evandisoft.multistagedeltav.app;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -23,11 +24,37 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListView expandableListView;
     Rocket rocket;
     TextView rocketNameTextField;
+    RocketStagesAdapter rocketStagesAdapter;
+    //ArrayAdapter<String> rocketNameAutoTextAdapter;
+    //ArrayAdapter<String> stageNameAutoTextAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // TODO I can't remember this stuff
+        //this.rocketNameAutoTextAdapter = new ArrayAdapter<String>(this,);
+        //this.stageNameAutoTextAdapter = new ArrayAdapter<String>(this, );
+
+        this.rocket = new Rocket();
+        this.expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        this.rocketNameTextField = (TextView) findViewById(R.id.rocketNameTextField);
+        this.rocketNameTextField.addTextChangedListener(this.rocket.nameWatcher);
+
+        this.rocketStagesAdapter = new RocketStagesAdapter(this, this.rocket);
+        this.expandableListView.setAdapter(this.rocketStagesAdapter);
+        this.addStageGroup = (RadioGroup) findViewById(R.id.addStageGroup);
+        this.addIndexTextField = (TextView) findViewById(R.id.addIndexTextField);
+        this.addIndexTextField.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                MainActivity.this.addStageGroup.check(R.id.addIndexRadioButton);
+                return false;
+            }
+        });
+
+        // TODO Not sure yet entirely what this did
+        //loadAppFiles();
     }
 
     public void onUpdateButtonClicked(View view) {
@@ -89,10 +116,18 @@ public class MainActivity extends AppCompatActivity {
         // TODO not sure what this does anymore - loadAppFiles();
     }
 
+    public void onNewButtonClicked(View view) {
+        this.rocket.clear();
+        this.rocket.add(new RocketStage());
+        this.rocketNameTextField.setText("Default Rocket Name");
+        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
+    }
+
 //    public void loadAppFiles() {
 //        this.appFiles = FileIO.getAppFiles(this);
-//        this.stageNameAutoTextAdapter.clear();
-//        this.rocketNameAutoTextAdapter.clear();
+//        // TODO Must fix this when I figure out what this is about
+//        //this.stageNameAutoTextAdapter.clear();
+//        //this.rocketNameAutoTextAdapter.clear();
 //        for (File file : this.appFiles) {
 //            String name = file.getName().replace(".json", "");
 //            if (name.startsWith("stage_")) {
