@@ -22,7 +22,6 @@ class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.rocket_stage_group_view, viewGroup, false);
-        // TODO set the textview v's values properly with respect to the ith rocket stage
 
         RocketStageViewHolder vh=new RocketStageViewHolder(v);
 

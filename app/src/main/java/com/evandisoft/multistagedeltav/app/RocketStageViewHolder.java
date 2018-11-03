@@ -10,9 +10,6 @@ import com.evandisoft.multistagedeltav.R;
 
 class RocketStageViewHolder extends RecyclerView.ViewHolder {
     private TextView deltaV;
-//    private TextView dryMass;
-//    private TextView fullMass;
-//    private TextView isp;
     private TextView mass;
     private TextView name;
     private Button removeStageButton;
@@ -22,9 +19,6 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
 
         deltaV=itemView.findViewById(R.id.deltaVTextView);
         mass=itemView.findViewById(R.id.massTextView);
-        //dryMass=itemView.findViewById(R.id.dryMassTextField);
-        //fullMass=itemView.findViewById(R.id.fullMassTextField);
-        //isp=itemView.findViewById(R.id.ispTextField);
         name=itemView.findViewById(R.id.stageNameTextView);
         removeStageButton=itemView.findViewById(R.id.removeStageButton);
     }
