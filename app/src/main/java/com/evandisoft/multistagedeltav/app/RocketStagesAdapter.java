@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -84,13 +85,91 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    // The tool used to rebuild the source didn't seem to generate this properly
+    private class ChildViewHolder {
+        public TextView deltaV;
+        public TextView dryMass;
+        public TextView fullMass;
+        public TextView isp;
+        public TextView name;
+        public RocketStage rocketStage;
+
+        private ChildViewHolder() {
+        }
+
+        // Changed "AnonymousClass" that was in second parameter, to Object
+        ChildViewHolder(RocketStagesAdapter x0, Object x1) {
+            this();
+        }
+    }
+
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        return null;
+        ChildViewHolder childViewHolder;
+        final RocketStage rocketStage = (RocketStage) this.rocket.get(groupPosition);
+        if (convertView == null) {
+            convertView = this.layoutInflater.inflate(R.layout.rocket_stage_view, parent, false);
+            childViewHolder = new ChildViewHolder(this, null);
+            childViewHolder.rocketStage = rocketStage;
+            childViewHolder.name = (TextView) convertView.findViewById(R.id.stageNameTextField);
+            //TODO fix this
+            // ((AutoCompleteTextView) convertView.findViewById(R.id.stageNameTextField)).setAdapter(((MainActivity) this.context).stageNameAutoTextAdapter);
+            childViewHolder.fullMass = (TextView) convertView.findViewById(R.id.fullMassTextField);
+            childViewHolder.dryMass = (TextView) convertView.findViewById(R.id.dryMassTextField);
+            childViewHolder.isp = (TextView) convertView.findViewById(R.id.ispTextField);
+            childViewHolder.deltaV = (TextView) convertView.findViewById(R.id.deltaVTextView);
+            convertView.setTag(childViewHolder);
+        } else {
+            childViewHolder = (ChildViewHolder) convertView.getTag();
+            childViewHolder.name.removeTextChangedListener(childViewHolder.rocketStage.nameWatcher);
+            childViewHolder.fullMass.removeTextChangedListener(childViewHolder.rocketStage.fullMassWatcher);
+            childViewHolder.dryMass.removeTextChangedListener(childViewHolder.rocketStage.dryMassWatcher);
+            childViewHolder.isp.removeTextChangedListener(childViewHolder.rocketStage.ispWatcher);
+        }
+        childViewHolder.name.setText(rocketStage.name);
+        if (rocketStage.getFullMass() == 0.0d) {
+            childViewHolder.fullMass.setText("");
+        } else {
+            childViewHolder.fullMass.setText(this.decimalFormat.format(rocketStage.getFullMass()));
+        }
+        if (rocketStage.getDryMass() == 0.0d) {
+            childViewHolder.dryMass.setText("");
+        } else {
+            childViewHolder.dryMass.setText(this.decimalFormat.format(rocketStage.getDryMass()));
+        }
+        if (rocketStage.getIsp() == 0.0d) {
+            childViewHolder.isp.setText("");
+        } else {
+            childViewHolder.isp.setText(this.decimalFormat.format(rocketStage.getIsp()));
+        }
+        childViewHolder.deltaV.setText(this.decimalFormat.format(rocketStage.getDeltaV()));
+        childViewHolder.name.addTextChangedListener(rocketStage.nameWatcher);
+        childViewHolder.fullMass.addTextChangedListener(rocketStage.fullMassWatcher);
+        childViewHolder.dryMass.addTextChangedListener(rocketStage.dryMassWatcher);
+        childViewHolder.isp.addTextChangedListener(rocketStage.ispWatcher);
+        childViewHolder.rocketStage = rocketStage;
+
+        // TODO Fix these buttons
+//        convertView.findViewById(R.id.stageClearButton).setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                RocketStagesAdapter.this.clearRocketStage((RocketStage) RocketStagesAdapter.this.rocket.get(groupPosition));
+//            }
+//        });
+//        convertView.findViewById(R.id.stageSaveButton).setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                RocketStagesAdapter.this.saveRocketStage((RocketStage) RocketStagesAdapter.this.rocket.get(groupPosition));
+//            }
+//        });
+//        convertView.findViewById(R.id.stageLoadButton).setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                RocketStagesAdapter.this.loadRocketStage(rocketStage);
+//            }
+//        });
+        return convertView;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 }
