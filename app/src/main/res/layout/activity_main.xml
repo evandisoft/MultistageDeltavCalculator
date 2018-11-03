@@ -7,7 +7,7 @@
     tools:context=".app.MainActivity">
 
 
-
+ 
     android:focusable="false"
     android:focusableInTouchMode="false"
     android:paddingLeft="@dimen/activity_horizontal_margin"
