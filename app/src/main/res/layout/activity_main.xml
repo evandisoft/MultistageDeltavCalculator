@@ -123,7 +123,7 @@
                 android:focusable="true"
                 android:hint="@string/addStageAtIndexHint"
                 android:inputType="numberSigned"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"/>
         </LinearLayout>
 
         <LinearLayout
