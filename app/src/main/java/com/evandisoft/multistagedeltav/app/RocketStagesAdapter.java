@@ -150,7 +150,7 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
         childViewHolder.isp.addTextChangedListener(rocketStage.ispWatcher);
         childViewHolder.rocketStage = rocketStage;
 
-        // TODO Fix these buttons
+
         final int finalGroupPosition=groupPosition;
         convertView.findViewById(R.id.stageClearButton).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

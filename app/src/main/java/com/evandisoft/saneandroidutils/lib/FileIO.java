@@ -8,14 +8,16 @@ import java.io.FileOutputStream;
 
 public class FileIO {
     public static void writeStringToFile(Context context, String filename, String contents) {
+        File file = new File(context.getFilesDir(), filename);
+        MediaScannerConnection.scanFile(context, new String[]{file.getAbsolutePath()}, null, null);
         filename = filename.replaceAll(" ", "\\ ");
         try {
             FileOutputStream fileOutputStream = context.openFileOutput(filename, 0);
             fileOutputStream.write(contents.getBytes());
             fileOutputStream.flush();
             fileOutputStream.close();
-            File file = new File(context.getFilesDir(), filename);
-            MediaScannerConnection.scanFile(context, new String[]{file.getAbsolutePath()}, null, null);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
