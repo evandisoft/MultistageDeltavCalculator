@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
         }
-        // TODO replace with equivalent - this.rocketStagesAdapter.notifyDataSetChanged();
+        this.rocketStagesAdapter.notifyDataSetChanged();
     }
 
     public void clearAddFocus(View view) {
