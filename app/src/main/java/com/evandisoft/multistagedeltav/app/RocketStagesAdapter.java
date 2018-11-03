@@ -5,6 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.evandisoft.multistagedeltav.R;
 
 import java.text.DecimalFormat;
 
@@ -59,7 +64,24 @@ class RocketStagesAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        return null;
+        final int index = groupPosition;
+        if (convertView == null) {
+            convertView = this.layoutInflater.inflate(R.layout.rocket_stage_group_view, parent, false);
+        }
+        ((TextView) convertView.findViewById(R.id.stageNumberTextView)).setText("" + groupPosition);
+        ((TextView) convertView.findViewById(R.id.stageNameTextView)).setText(((RocketStage) this.rocket.get(groupPosition)).name);
+        ((TextView) convertView.findViewById(R.id.massTextView)).setText("" + this.decimalFormat.format(((RocketStage) this.rocket.get(groupPosition)).effectiveFullMass()));
+        ((TextView) convertView.findViewById(R.id.deltaVTextView)).setText("" + this.decimalFormat.format(this.rocket.getDeltaVUpThrough(groupPosition)));
+        Button removeStageButton = (Button) convertView.findViewById(R.id.removeStageButton);
+        removeStageButton.setFocusable(false);
+        removeStageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RocketStagesAdapter.this.rocket.remove(index);
+                RocketStagesAdapter.this.notifyDataSetChanged();
+            }
+        });
+        parent.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
+        return convertView;
     }
 
     @Override
