@@ -15,6 +15,11 @@ import com.evandisoft.saneandroidutils.lib.FileIO;
 
 import java.text.DecimalFormat;
 
+// Unfortunately I think the design I was using now cannot work
+// Even if I fix the focus issues on my devices I cannot ensure that there will be none in the future
+// or on other devices.
+// But maybe I'll eventually figure out why this went wrong.
+@Deprecated
 class RocketStagesAdapter extends BaseExpandableListAdapter {
     private Context context;
     private DecimalFormat decimalFormat = new DecimalFormat();

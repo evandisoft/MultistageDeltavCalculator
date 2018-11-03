@@ -126,18 +126,11 @@
                 android:selectAllOnFocus="true"/>
         </LinearLayout>
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rocketStagesRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="match_parent" />
 
-            <ExpandableListView
-                android:id="@+id/expandableListView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:descendantFocusability="afterDescendants" />
-        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

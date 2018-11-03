@@ -1,15 +1,14 @@
 package com.evandisoft.multistagedeltav.app;
 
-import android.app.Activity;
-import android.support.v4.view.accessibility.AccessibilityEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ExpandableListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -24,10 +23,12 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup addStageGroup;
     File[] appFiles;
     AutoCompleteTextView autoText;
-    ExpandableListView expandableListView;
+    RecyclerView rocketStagesRecyclerView;
+    RocketStagesRecyclerAdapter rocketStagesRecyclerAdapter;
+    RecyclerView.LayoutManager rocketStagesRecyclerLayoutManager;
     Rocket rocket;
     AutoCompleteTextView rocketNameTextField;
-    RocketStagesAdapter rocketStagesAdapter;
+    //RocketStagesAdapter rocketStagesAdapter;
     ArrayAdapter<String> rocketNameAutoTextAdapter;
     ArrayAdapter<String> stageNameAutoTextAdapter;
 
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         rocketNameTextField = findViewById(R.id.rocketNameTextField);
+
+
         
         this.rocketNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
@@ -47,13 +50,19 @@ public class MainActivity extends AppCompatActivity {
         this.stageNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
         this.rocket = new Rocket();
-        this.expandableListView = findViewById(R.id.expandableListView);
+
+        rocketStagesRecyclerAdapter=new RocketStagesRecyclerAdapter(rocket);
+        rocketStagesRecyclerLayoutManager =new LinearLayoutManager(this);
+        rocketStagesRecyclerView =findViewById(R.id.rocketStagesRecyclerView);
+        rocketStagesRecyclerView.setLayoutManager(rocketStagesRecyclerLayoutManager);
+        rocketStagesRecyclerView.setAdapter(rocketStagesRecyclerAdapter);
+
         //this.expandableListView.setDescendantFocusability();
 
         this.rocketNameTextField.addTextChangedListener(this.rocket.nameWatcher);
 
-        this.rocketStagesAdapter = new RocketStagesAdapter(this, this.rocket);
-        this.expandableListView.setAdapter(this.rocketStagesAdapter);
+        //this.rocketStagesAdapter = new RocketStagesAdapter(this, this.rocket);
+
         this.addStageGroup = findViewById(R.id.addStageGroup);
         this.addIndexTextField = findViewById(R.id.addIndexTextField);
         this.addIndexTextField.setOnTouchListener(new View.OnTouchListener() {
@@ -96,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
         }
-        this.rocketStagesAdapter.notifyDataSetChanged();
+        this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
     protected void onStart() {
@@ -117,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         String string = FileIO.readStringFromFile(this, "autosave.json");
         if (string != null) {
             this.rocket.fromString(string);
-            this.rocketStagesAdapter.notifyDataSetChanged();
+            this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
         }
         this.rocketNameTextField.setText(this.rocket.name);
     }
@@ -132,20 +141,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClearClicked(View view) {
         this.rocket.clear();
-        this.rocketStagesAdapter.notifyDataSetChanged();
+        this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
     public void onLoadRocketClicked(View view) {
         String string = FileIO.readStringFromFile(this, "rocket_" + this.rocket.name + ".json");
         if (string != null) {
             this.rocket.fromString(string);
-            this.rocketStagesAdapter.notifyDataSetChanged();
+            this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
         }
     }
 
     public void onSaveRocketClicked(View view) {
         FileIO.writeStringToFile(this, "rocket_" + this.rocket.name + ".json", this.rocket.toString());
-        this.rocketStagesAdapter.notifyDataSetChanged();
+        this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
         loadAppFiles();
     }
 
@@ -153,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         this.rocket.clear();
         this.rocket.add(new RocketStage());
         this.rocketNameTextField.setText(getString(R.string.DefaultRocketName));
-        this.rocketStagesAdapter.notifyDataSetChanged();
+        this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
     public void loadAppFiles() {
