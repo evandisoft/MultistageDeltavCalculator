@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MultiStageDeltav</string>
+    <string name="app_name">Multi Stage Deltav</string>
     <string name="action_settings">Settings</string>
     <string name="load">Load</string>
     <string name="deltav_m_s">DeltaV (m/s)</string>
