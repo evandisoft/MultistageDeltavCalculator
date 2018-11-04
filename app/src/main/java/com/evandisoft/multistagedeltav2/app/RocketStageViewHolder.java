@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 
 class RocketStageViewHolder extends RecyclerView.ViewHolder {
     private DecimalFormat decimalFormat = new DecimalFormat();
+    private DecimalFormat deltavFormat=new DecimalFormat();
 
 
     private TextView massView,deltavView,totalDownDeltavView,totalDownMassView,totalUpDeltavView,
@@ -29,6 +30,7 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
     public RocketStageViewHolder(@NonNull View itemView) {
         super(itemView);
         //decimalFormat.
+        deltavFormat.setMaximumFractionDigits(0);
 
         massView =itemView.findViewById(R.id.rocketStageGroupMassView);
         deltavView =itemView.findViewById(R.id.rocketStageGroupDeltavView);
@@ -54,38 +56,38 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
         double mass=rocketStage.getFullMass();
         massView.setText(this.decimalFormat.format(mass));
         double deltav=rocketStage.getDeltaV();
-        deltavView.setText(this.decimalFormat.format(deltav));
+        deltavView.setText(this.deltavFormat.format(deltav));
         double deltavUpThrough=rocket.getDeltaVUpThrough(i);
-        totalUpDeltavView.setText(this.decimalFormat.format(deltavUpThrough));
+        totalUpDeltavView.setText(this.deltavFormat.format(deltavUpThrough));
         double massUpThrough=rocket.getMassUpThrough(i);
         totalUpMassView.setText(this.decimalFormat.format(massUpThrough));
         double deltavDownThrough=rocket.getDeltaVDownThrough(i);
-        totalDownDeltavView.setText(this.decimalFormat.format(deltavDownThrough));
+        totalDownDeltavView.setText(this.deltavFormat.format(deltavDownThrough));
         double massDownThrough=rocket.getMassDownThrough(i);
         totalDownMassView.setText(this.decimalFormat.format(massDownThrough));
         nameView.setText(String.format(" %s",rocketStage.name));
         stageNumberView.setText(String.format(" %d",i));
 
 
-        TableRow[] setVisibleRows={titleRow,stageRow,totalUpRow,totalDownRow};
-        for(TableRow row:setVisibleRows){
-            row.setVisibility(View.VISIBLE);
-        }
-
-        if(mass==massDownThrough){
-            totalDownRow.setVisibility(View.GONE);
-        }
-
-        if(mass==massUpThrough){
-            totalUpRow.setVisibility(View.GONE);
-        }
-
-        if(mass==0){
-            TableRow[] goneRows={totalUpRow,totalDownRow};
-            for(TableRow row:goneRows){
-                row.setVisibility(View.GONE);
-            }
-        }
+//        TableRow[] setVisibleRows={titleRow,stageRow,totalUpRow,totalDownRow};
+//        for(TableRow row:setVisibleRows){
+//            row.setVisibility(View.VISIBLE);
+//        }
+//
+//        if(mass==massDownThrough){
+//            totalDownRow.setVisibility(View.GONE);
+//        }
+//
+//        if(mass==massUpThrough){
+//            totalUpRow.setVisibility(View.GONE);
+//        }
+//
+//        if(mass==0){
+//            TableRow[] goneRows={totalUpRow,totalDownRow};
+//            for(TableRow row:goneRows){
+//                row.setVisibility(View.GONE);
+//            }
+//        }
 
         final RocketStagesRecyclerAdapter finalRsra=rsra;
         final int finalI=i;
