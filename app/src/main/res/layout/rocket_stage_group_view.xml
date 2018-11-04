@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content">
 
                 <TableRow
+                    android:id="@+id/rocketStageGroupTitleRow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -87,6 +88,7 @@
                 </TableRow>
 
                 <TableRow
+                    android:id="@+id/rocketStageGroupStageRow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -121,8 +123,8 @@
                 </TableRow>
 
 
-
                 <TableRow
+                    android:id="@+id/rocketStageGroupTotalDownRow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -159,6 +161,7 @@
                 </TableRow>
 
                 <TableRow
+                    android:id="@+id/rocketStageGroupTotalUpRow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
