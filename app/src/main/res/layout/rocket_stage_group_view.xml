@@ -40,153 +40,179 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <TableLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableLayout
+                android:id="@+id/rocketStageGroupTableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Space
-                    android:layout_width="10sp"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start" />
 
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:gravity="end"
-                    android:text="Mass (t)" />
+                    <Space
+                        android:layout_width="10sp"
+                        android:layout_height="wrap_content" />
 
-                <Space
-                    android:layout_width="10sp"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:gravity="end"
+                        android:text="Mass (t)" />
 
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:gravity="end"
-                    android:text="Deltav (m/s)" />
+                    <Space
+                        android:layout_width="10sp"
+                        android:layout_height="wrap_content" />
 
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:gravity="end"
+                        android:text="Deltav (m/s)" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_weight="0"
-                    android:text="Stage " />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Space android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="0"
+                        android:text="Stage " />
 
-                <TextView
-                    android:id="@+id/rocketStageGroupMassView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="TextView" />
+                    <Space android:layout_height="wrap_content" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/rocketStageGroupMassView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="TextView" />
 
-                <TextView
-                    android:id="@+id/rocketStageGroupDeltavView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="TextView" />
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-            </TableRow>
+                    <TextView
+                        android:id="@+id/rocketStageGroupDeltavView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="TextView" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:text="Total Down"
-                    app:autoSizeMinTextSize="10sp" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/rocketStageGroupTotalDownMassView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="TextView" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="Total Down"
+                        app:autoSizeMinTextSize="10sp" />
 
-                <TextView
-                    android:id="@+id/rocketStageGroupTotalDownDeltavView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="TextView" />
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-            </TableRow>
+                    <TextView
+                        android:id="@+id/rocketStageGroupTotalDownMassView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="TextView" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:text="Total Up"
-                    app:autoSizeMinTextSize="10sp" />
+                    <TextView
+                        android:id="@+id/rocketStageGroupTotalDownDeltavView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="TextView" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/rocketStageGroupTotalUpMassView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="TextView" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="Total Up"
+                        app:autoSizeMinTextSize="10sp" />
 
-                <TextView
-                    android:id="@+id/rocketStageGroupTotalUpDeltavView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="TextView" />
-            </TableRow>
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-        </TableLayout>
+                    <TextView
+                        android:id="@+id/rocketStageGroupTotalUpMassView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="TextView" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/rocketStageGroupTotalUpDeltavView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="TextView" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10sp" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+            </TableLayout>
+        </HorizontalScrollView>
 
         <Button
             android:id="@+id/rocketStageGroupRemoveButton"
@@ -198,11 +224,5 @@
             tools:text="X" />
 
     </LinearLayout>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10sp"
-        android:layout_weight="1" />
 
 </LinearLayout>

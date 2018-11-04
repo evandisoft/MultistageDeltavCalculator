@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.RadioGroup;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         loadAppFiles();
+
+
     }
 
     public void onUpdateButtonClicked(View view) {

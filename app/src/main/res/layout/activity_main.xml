@@ -4,20 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".app.MainActivity"
-    android:focusable="false"
-    android:focusableInTouchMode="false">
+    android:windowSoftInputMode="adjustResize|stateHidden">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="0px"
+            android:layout_height="0px"/>
+
         <AutoCompleteTextView
             android:id="@+id/rocketNameTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textNoSuggestions"
             android:hint="@string/name_of_rocket"
+            android:inputType="textNoSuggestions"
             android:selectAllOnFocus="true" />
 
         <LinearLayout
@@ -102,7 +107,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="false"
                     android:onClick="clearAddFocus"
-                    android:text="@string/addEndOptionText" />
+                    android:text="@string/addEndOptionText"/>
 
                 <RadioButton
                     android:id="@+id/addIndexRadioButton"

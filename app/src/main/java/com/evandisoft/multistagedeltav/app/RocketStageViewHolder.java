@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.evandisoft.multistagedeltav.R;
@@ -14,27 +15,37 @@ import java.text.DecimalFormat;
 class RocketStageViewHolder extends RecyclerView.ViewHolder {
     private DecimalFormat decimalFormat = new DecimalFormat();
 
-    private TextView deltaV;
     private TextView mass;
+    private TextView deltav;
+
+    private TextView totalDownDeltav;
+    private TextView totalDownMass;
     private TextView name;
     private TextView stageNumber;
+    private TableLayout tableLayout;
 
     private Button removeStageButton;
 
     public RocketStageViewHolder(@NonNull View itemView) {
         super(itemView);
+        //decimalFormat.
 
-        deltaV=itemView.findViewById(R.id.rocketStageGroupDeltavView);
         mass=itemView.findViewById(R.id.rocketStageGroupMassView);
+        deltav=itemView.findViewById(R.id.rocketStageGroupDeltavView);
+        totalDownDeltav =itemView.findViewById(R.id.rocketStageGroupTotalDownDeltavView);
+        totalDownMass =itemView.findViewById(R.id.rocketStageGroupTotalDownMassView);
         name=itemView.findViewById(R.id.rocketStageGroupStageNameView);
         stageNumber=itemView.findViewById(R.id.rocketStageGroupStageNumber);
         removeStageButton=itemView.findViewById(R.id.rocketStageGroupRemoveButton);
+        tableLayout=itemView.findViewById(R.id.rocketStageGroupTableLayout);
     }
 
     public void set(RocketStagesRecyclerAdapter rsra, final MainActivity mainActivity, Rocket rocket, int i){
         RocketStage rocketStage=rocket.get(i);
-        deltaV.setText(this.decimalFormat.format(rocketStage.getDeltaV()));
-        mass.setText(this.decimalFormat.format(rocketStage.effectiveFullMass()));
+        mass.setText(this.decimalFormat.format(rocketStage.getFullMass()));
+        deltav.setText(this.decimalFormat.format(rocketStage.getDeltaV()));
+        totalDownDeltav.setText(this.decimalFormat.format(rocket.getDeltaVUpThrough(i)));
+        totalDownMass.setText(this.decimalFormat.format(rocketStage.effectiveFullMass()));
         name.setText(String.format(" %s",rocketStage.name));
         stageNumber.setText(String.format(" %d",i));
 
@@ -47,7 +58,7 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
                 finalRsra.notifyDataSetChanged();
             }
         });
-        this.itemView.setOnClickListener(new View.OnClickListener(){
+        this.tableLayout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {

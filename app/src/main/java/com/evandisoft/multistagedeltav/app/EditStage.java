@@ -1,9 +1,11 @@
 package com.evandisoft.multistagedeltav.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +33,8 @@ public class EditStage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_stage);
+
+
         app=App.getInstance();
 
         thisIntent=getIntent();
@@ -55,6 +59,10 @@ public class EditStage extends AppCompatActivity {
         deltavView=findViewById(R.id.deltaVTextView);
 
         update();
+
+        InputMethodManager imm = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(fullMassEdit, InputMethodManager.SHOW_IMPLICIT);
     }
 
     private void update(){
@@ -70,7 +78,8 @@ public class EditStage extends AppCompatActivity {
         this.rocket.calculateRocketCharacteristics();
         //MainActivity.mainActivity.rocketStagesRecyclerAdapter.notifyDataSetChanged();
         //MainActivity.mainActivity.loadAppFiles();
-        update();
+        // update();
+        this.finish();
     }
 
     public void updateOnClick(View view) {
