@@ -1,9 +1,7 @@
-package com.evandisoft.multistagedeltav.app;
+package com.evandisoft.multistagedeltav2.app;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-
-import com.evandisoft.multistagedeltav.app.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

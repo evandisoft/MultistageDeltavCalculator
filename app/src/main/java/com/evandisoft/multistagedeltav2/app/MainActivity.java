@@ -1,4 +1,4 @@
-package com.evandisoft.multistagedeltav.app;
+package com.evandisoft.multistagedeltav2.app;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,8 +14,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.evandisoft.saneandroidutils.lib.FileIO;
-
-import com.evandisoft.multistagedeltav.app.R;
 
 import java.io.File;
 
@@ -115,9 +113,16 @@ public class MainActivity extends AppCompatActivity {
         this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
+    protected void onResume(){
+        super.onResume();
+        rocketNameTextField.clearFocus();
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
     protected void onStart() {
         super.onStart();
         rocketStagesRecyclerAdapter.notifyDataSetChanged();
+
     }
 
     protected void onStop() {

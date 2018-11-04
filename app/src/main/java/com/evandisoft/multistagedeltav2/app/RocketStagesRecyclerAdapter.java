@@ -1,14 +1,10 @@
-package com.evandisoft.multistagedeltav.app;
+package com.evandisoft.multistagedeltav2.app;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.evandisoft.multistagedeltav.app.R;
-
-import java.text.DecimalFormat;
 
 class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView.Adapter {
     MainActivity mainActivity;

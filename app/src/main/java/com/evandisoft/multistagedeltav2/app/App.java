@@ -1,6 +1,4 @@
-package com.evandisoft.multistagedeltav.app;
-
-import com.evandisoft.saneandroidutils.lib.FileIO;
+package com.evandisoft.multistagedeltav2.app;
 
 public class App {
     private static App instance;

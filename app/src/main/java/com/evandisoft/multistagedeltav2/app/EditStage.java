@@ -1,6 +1,6 @@
-package com.evandisoft.multistagedeltav.app;
+package com.evandisoft.multistagedeltav2.app;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.evandisoft.multistagedeltav.app.R;
 import com.evandisoft.saneandroidutils.lib.FileIO;
 
 import java.io.File;
@@ -126,6 +125,20 @@ public class EditStage extends AppCompatActivity {
         this.rocket.calculateRocketCharacteristics();
         //MainActivity.mainActivity.rocketStagesRecyclerAdapter.notifyDataSetChanged();
         update();
+  //      this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED);
+ //       this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        hideKeyboard(this);
         this.finish();
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
