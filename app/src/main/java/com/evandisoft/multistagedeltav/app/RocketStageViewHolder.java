@@ -24,11 +24,11 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
     public RocketStageViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        deltaV=itemView.findViewById(R.id.deltaVTextView);
-        mass=itemView.findViewById(R.id.massTextView);
-        name=itemView.findViewById(R.id.stageNameTextView);
-        stageNumber=itemView.findViewById(R.id.stageNumberTextView);
-        removeStageButton=itemView.findViewById(R.id.removeStageButton);
+        deltaV=itemView.findViewById(R.id.rocketStageGroupDeltavView);
+        mass=itemView.findViewById(R.id.rocketStageGroupMassView);
+        name=itemView.findViewById(R.id.rocketStageGroupStageNameView);
+        stageNumber=itemView.findViewById(R.id.rocketStageGroupStageNumber);
+        removeStageButton=itemView.findViewById(R.id.rocketStageGroupRemoveButton);
     }
 
     public void set(RocketStagesRecyclerAdapter rsra, final MainActivity mainActivity, Rocket rocket, int i){
