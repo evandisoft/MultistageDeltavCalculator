@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.evandisoft.multistagedeltav.R;
+import com.evandisoft.multistagedeltav.app.R;
 import com.evandisoft.saneandroidutils.lib.FileIO;
 
+import java.io.File;
 import java.text.DecimalFormat;
 
 public class EditStage extends AppCompatActivity {
@@ -28,11 +31,14 @@ public class EditStage extends AppCompatActivity {
     AutoCompleteTextView stageNameAutoComplete;
     Rocket rocket;
     App app;
+    private ArrayAdapter stageNameAutoTextAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_stage);
+
+        this.stageNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
 
         app=App.getInstance();
@@ -56,13 +62,29 @@ public class EditStage extends AppCompatActivity {
         stageNameAutoComplete =findViewById(R.id.stageNameAutoComplete);
         stageNameAutoComplete .addTextChangedListener(rocketStage.nameWatcher);
 
+        stageNameAutoComplete.setAdapter(stageNameAutoTextAdapter);
+        stageNameAutoComplete.setThreshold(1);
+
         deltavView=findViewById(R.id.deltaVTextView);
 
         update();
+        fullMassEdit.requestFocus();
 
-        InputMethodManager imm = (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(fullMassEdit, InputMethodManager.SHOW_IMPLICIT);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        loadAutoComplete();
+    }
+
+    public void loadAutoComplete() {
+        File[] appFiles = FileIO.getAppFiles(this);
+
+        this.stageNameAutoTextAdapter.clear();
+        for (File file : appFiles) {
+            String name = file.getName().replace(".json", "");
+            if (name.startsWith("stage_")) {
+                this.stageNameAutoTextAdapter.add(name.replace("stage_", ""));
+            }
+        }
     }
 
     private void update(){
@@ -77,9 +99,10 @@ public class EditStage extends AppCompatActivity {
         FileIO.writeStringToFile(this.getApplicationContext(), "stage_" + rocketStage.name + ".json", rocketStage.toString());
         this.rocket.calculateRocketCharacteristics();
         //MainActivity.mainActivity.rocketStagesRecyclerAdapter.notifyDataSetChanged();
-        //MainActivity.mainActivity.loadAppFiles();
-        // update();
-        this.finish();
+        //MainActivity.mainActivity.loadAutoComplete();
+        update();
+        loadAutoComplete();
+        //
     }
 
     public void updateOnClick(View view) {
@@ -98,12 +121,11 @@ public class EditStage extends AppCompatActivity {
 
     }
 
-    public void stageClearOnClick(View view) {
+    public void stageDoneOnClick(View view) {
         String name = rocketStage.name;
-        rocketStage.copyValues(new RocketStage());
-        rocketStage.name = name;
         this.rocket.calculateRocketCharacteristics();
         //MainActivity.mainActivity.rocketStagesRecyclerAdapter.notifyDataSetChanged();
         update();
+        this.finish();
     }
 }

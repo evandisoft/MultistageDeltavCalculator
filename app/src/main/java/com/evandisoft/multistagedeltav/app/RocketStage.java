@@ -3,6 +3,8 @@ package com.evandisoft.multistagedeltav.app;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.evandisoft.multistagedeltav.app.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,7 @@ class RocketStage {
     public String name;
     public TextWatcher nameWatcher;
     private RocketStage parent;
+
 
     protected void setContainer(Rocket container) {
         this.container = container;
@@ -57,6 +60,10 @@ class RocketStage {
     public void setIsp(double isp) {
         this.isp = isp;
         calculateDeltaV();
+    }
+
+    public RocketStage(String stageName) {
+        this(stageName, 0.0d, 0.0d, 0.0d);
     }
 
     public RocketStage() {

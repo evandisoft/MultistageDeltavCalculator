@@ -33,4 +33,6 @@
     <string name="pointlessStringIDDeltav">345.19</string>
     <string name="m_sexamplestringblahblahbalh">m/s</string>
     <string name="deleteButtonText">X</string>
+    <string name="default_stage_name">Default Stage Name</string>
+    <string name="default_rocket_name">Default Rocket Name</string>
 </resources>

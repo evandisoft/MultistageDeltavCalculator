@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.RadioGroup;
@@ -15,15 +15,13 @@ import android.widget.TextView;
 
 import com.evandisoft.saneandroidutils.lib.FileIO;
 
-import com.evandisoft.multistagedeltav.R;
+import com.evandisoft.multistagedeltav.app.R;
 
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     TextView addIndexTextField;
     RadioGroup addStageGroup;
-    File[] appFiles;
-    AutoCompleteTextView autoText;
     RecyclerView rocketStagesRecyclerView;
     RocketStagesRecyclerAdapter rocketStagesRecyclerAdapter;
     RecyclerView.LayoutManager rocketStagesRecyclerLayoutManager;
@@ -31,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView rocketNameTextField;
     //RocketStagesAdapter rocketStagesAdapter;
     ArrayAdapter<String> rocketNameAutoTextAdapter;
-    ArrayAdapter<String> stageNameAutoTextAdapter;
     App app;
     boolean firstStartup;
 
@@ -43,17 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
         firstStartup=!App.instanciated();
         app=App.getInstance();
+        this.rocket=app.rocket;
 
         rocketNameTextField = findViewById(R.id.rocketNameTextField);
         this.rocketNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
-        this.autoText = rocketNameTextField;
-        this.autoText.setAdapter(this.rocketNameAutoTextAdapter);
-        this.autoText.setThreshold(1);
+        rocketNameTextField.setAdapter(rocketNameAutoTextAdapter);
+        rocketNameTextField.setThreshold(1);
 
-        this.stageNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
 
-        this.rocket = app.rocket;
 
         rocketStagesRecyclerAdapter=new RocketStagesRecyclerAdapter(rocket,this);
         rocketStagesRecyclerLayoutManager =new LinearLayoutManager(this);
@@ -81,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
             autoload();
         }
 
-        loadAppFiles();
+        loadAutoComplete();
 
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     public void onUpdateButtonClicked(View view) {
@@ -95,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAddStageClick(View view) {
-        RocketStage newStage = new RocketStage();
+        String stageName=getResources().getString(R.string.default_stage_name);
+        RocketStage newStage = new RocketStage(stageName);
+
         switch (this.addStageGroup.getCheckedRadioButtonId()) {
             case R.id.addStartRadioButton:
                 this.rocket.add(0, newStage);
@@ -138,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
             this.rocket.fromString(string);
             this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
         }
+        else{
+            this.rocket.name=getResources().getString(R.string.default_rocket_name);
+        }
         this.rocketNameTextField.setText(this.rocket.name);
     }
 
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveRocketClicked(View view) {
         FileIO.writeStringToFile(this, "rocket_" + this.rocket.name + ".json", this.rocket.toString());
         this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
-        loadAppFiles();
+        loadAutoComplete();
     }
 
     public void onNewButtonClicked(View view) {
@@ -175,16 +175,13 @@ public class MainActivity extends AppCompatActivity {
         this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
-    public void loadAppFiles() {
-        this.appFiles = FileIO.getAppFiles(this);
+    public void loadAutoComplete() {
+        File[] appFiles = FileIO.getAppFiles(this);
 
-        this.stageNameAutoTextAdapter.clear();
         this.rocketNameAutoTextAdapter.clear();
-        for (File file : this.appFiles) {
+        for (File file : appFiles) {
             String name = file.getName().replace(".json", "");
-            if (name.startsWith("stage_")) {
-                this.stageNameAutoTextAdapter.add(name.replace("stage_", ""));
-            } else if (name.startsWith("rocket_")) {
+            if (name.startsWith("rocket_")) {
                 this.rocketNameAutoTextAdapter.add(name.replace("rocket_", ""));
             }
         }
