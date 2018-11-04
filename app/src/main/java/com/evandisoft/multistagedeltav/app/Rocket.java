@@ -89,9 +89,33 @@ class Rocket extends ArrayList<RocketStage> {
         return prev;
     }
 
-    public double getDeltaVUpThrough(int index) {
+    public double getMassDownThrough(int index) {
+        double mass = 0.0d;
+        for (int i = 0; i <= index; i++) {
+            mass += ((RocketStage) get(i)).getFullMass();
+        }
+        return mass;
+    }
+
+    public double getMassUpThrough(int index) {
+        double mass = 0.0d;
+        for (int i = this.size()-1; i >= index; i--) {
+            mass += ((RocketStage) get(i)).getFullMass();
+        }
+        return mass;
+    }
+
+    public double getDeltaVDownThrough(int index) {
         double deltaV = 0.0d;
         for (int i = 0; i <= index; i++) {
+            deltaV += ((RocketStage) get(i)).getDeltaV();
+        }
+        return deltaV;
+    }
+
+    public double getDeltaVUpThrough(int index) {
+        double deltaV = 0.0d;
+        for (int i = this.size()-1; i >= index; i--) {
             deltaV += ((RocketStage) get(i)).getDeltaV();
         }
         return deltaV;

@@ -20,6 +20,8 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
 
     private TextView totalDownDeltav;
     private TextView totalDownMass;
+    private TextView totalUpDeltav;
+    private TextView totalUpMass;
     private TextView name;
     private TextView stageNumber;
     private TableLayout tableLayout;
@@ -34,6 +36,8 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
         deltav=itemView.findViewById(R.id.rocketStageGroupDeltavView);
         totalDownDeltav =itemView.findViewById(R.id.rocketStageGroupTotalDownDeltavView);
         totalDownMass =itemView.findViewById(R.id.rocketStageGroupTotalDownMassView);
+        totalUpDeltav =itemView.findViewById(R.id.rocketStageGroupTotalUpDeltavView);
+        totalUpMass =itemView.findViewById(R.id.rocketStageGroupTotalUpMassView);
         name=itemView.findViewById(R.id.rocketStageGroupStageNameView);
         stageNumber=itemView.findViewById(R.id.rocketStageGroupStageNumber);
         removeStageButton=itemView.findViewById(R.id.rocketStageGroupRemoveButton);
@@ -44,8 +48,10 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
         RocketStage rocketStage=rocket.get(i);
         mass.setText(this.decimalFormat.format(rocketStage.getFullMass()));
         deltav.setText(this.decimalFormat.format(rocketStage.getDeltaV()));
-        totalDownDeltav.setText(this.decimalFormat.format(rocket.getDeltaVUpThrough(i)));
-        totalDownMass.setText(this.decimalFormat.format(rocketStage.effectiveFullMass()));
+        totalUpDeltav.setText(this.decimalFormat.format(rocket.getDeltaVUpThrough(i)));
+        totalUpMass.setText(this.decimalFormat.format(rocket.getMassUpThrough(i)));
+        totalDownDeltav.setText(this.decimalFormat.format(rocket.getDeltaVDownThrough(i)));
+        totalDownMass.setText(this.decimalFormat.format(rocket.getMassDownThrough(i)));
         name.setText(String.format(" %s",rocketStage.name));
         stageNumber.setText(String.format(" %d",i));
 
