@@ -60,7 +60,7 @@ class RocketStage {
     }
 
     public RocketStage() {
-        this("Default Stage Name", 0.0d, 0.0d, 0.0d);
+        this("", 0.0d, 0.0d, 0.0d);
     }
 
     public RocketStage(String name, double fullMass, double dryMass, double isp) {

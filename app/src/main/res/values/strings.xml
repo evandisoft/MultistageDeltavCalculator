@@ -9,7 +9,7 @@
     <string name="clear">Clear</string>
     <string name="dry_mass_t">Dry Mass (t)</string>
     <string name="full_mass_t">Full Mass (t)</string>
-    <string name="DefaultRocketName">Default Rocket Name</string>
+    <string name="DefaultRocketName"></string>
     <string name="name_of_rocket">Name of Rocket</string>
     <string name="newButtonText">New</string>
     <string name="clearButtonText">Clear</string>
@@ -20,7 +20,7 @@
     <string name="addEndOptionText">End</string>
     <string name="addStageAtIndexHint">index</string>
     <string name="indexFieldDefaultText">0</string>
-    <string name="stage_name_hint">stage name</string>
+    <string name="stage_name_hint">Name of Stage</string>
     <string name="stageakjdhkfjhskjdhfkj">Stage </string>
     <string name="vbfbhd">1</string>
     <string name="dfklsjdlfjcclnslnsc">Bluto</string>
