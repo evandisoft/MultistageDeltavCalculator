@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="115" />
+                                                <entry key="scalingPercent" value="109" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -34,8 +34,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../Old Versions/OldMultiStageDeltaV Files/resources/res/drawable-mdpi-v4/my_launcher.png" />
-                                      <entry key="outputName" value="my_launcher" />
+                                      <entry key="backgroundLayerName" value="my_launcher_background2" />
+                                      <entry key="foregroundImage" value="$PROJECT_DIR$/../../InkscapeProjects/DeltavCalculatorGraphics/high-res-icon2.svg.png" />
+                                      <entry key="foregroundLayerName" value="my_launcher_foreground2" />
+                                      <entry key="outputName" value="my_launcher2" />
                                       <entry key="previewDensity" value="MEDIUM" />
                                     </map>
                                   </option>
