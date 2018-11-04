@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 
 import com.evandisoft.multistagedeltav.R;
 
+import java.text.DecimalFormat;
+
 class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView.Adapter {
     MainActivity mainActivity;
     Rocket rocket;
+
 
     public RocketStagesRecyclerAdapter(Rocket rocket,MainActivity mainActivity) {
         this.rocket=rocket;

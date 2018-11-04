@@ -9,10 +9,16 @@ import android.widget.TextView;
 
 import com.evandisoft.multistagedeltav.R;
 
+import java.text.DecimalFormat;
+
 class RocketStageViewHolder extends RecyclerView.ViewHolder {
+    private DecimalFormat decimalFormat = new DecimalFormat();
+
     private TextView deltaV;
     private TextView mass;
     private TextView name;
+    private TextView stageNumber;
+
     private Button removeStageButton;
 
     public RocketStageViewHolder(@NonNull View itemView) {
@@ -21,14 +27,16 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
         deltaV=itemView.findViewById(R.id.deltaVTextView);
         mass=itemView.findViewById(R.id.massTextView);
         name=itemView.findViewById(R.id.stageNameTextView);
+        stageNumber=itemView.findViewById(R.id.stageNumberTextView);
         removeStageButton=itemView.findViewById(R.id.removeStageButton);
     }
 
     public void set(RocketStagesRecyclerAdapter rsra, final MainActivity mainActivity, Rocket rocket, int i){
         RocketStage rocketStage=rocket.get(i);
-        deltaV.setText(String.format("%s", rocket.getDeltaVUpThrough(i)));
-        mass.setText(String.format("%s", rocketStage.effectiveFullMass()));
-        name.setText(String.format("%s", rocketStage.name));
+        deltaV.setText(this.decimalFormat.format(rocketStage.getDeltaV()));
+        mass.setText(this.decimalFormat.format(rocketStage.effectiveFullMass()));
+        name.setText(String.format(" %s",rocketStage.name));
+        stageNumber.setText(String.format(" %d",i));
 
         final RocketStagesRecyclerAdapter finalRsra=rsra;
         final int finalI=i;

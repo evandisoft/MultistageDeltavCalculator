@@ -11,7 +11,11 @@ import android.widget.TextView;
 import com.evandisoft.multistagedeltav.R;
 import com.evandisoft.saneandroidutils.lib.FileIO;
 
+import java.text.DecimalFormat;
+
 public class EditStage extends AppCompatActivity {
+    private DecimalFormat decimalFormat = new DecimalFormat();
+
     Intent thisIntent;
     int stageNumber;
     RocketStage rocketStage;
@@ -54,12 +58,11 @@ public class EditStage extends AppCompatActivity {
     }
 
     private void update(){
-        fullMassEdit.setText(""+rocketStage.getFullMass());
-        dryMassEdit.setText(""+rocketStage.getDryMass());
-        ispEdit.setText(""+rocketStage.getIsp());
+        fullMassEdit.setText(this.decimalFormat.format(rocketStage.getFullMass()));
+        dryMassEdit.setText(this.decimalFormat.format(rocketStage.getDryMass()));
+        ispEdit.setText(this.decimalFormat.format(rocketStage.getIsp()));
         stageNameAutoComplete.setText(rocketStage.name);
-        deltavView.setText(""+rocketStage.getDeltaV());
-
+        deltavView.setText(this.decimalFormat.format(rocketStage.getDeltaV()));
     }
 
     public void stageSaveOnClick(View view) {
