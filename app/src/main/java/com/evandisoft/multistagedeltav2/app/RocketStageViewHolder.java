@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 
 class RocketStageViewHolder extends RecyclerView.ViewHolder {
     private DecimalFormat decimalFormat = new DecimalFormat();
-    private DecimalFormat deltavFormat=new DecimalFormat();
+    App app;
 
 
     private TextView massView,deltavView,totalDownDeltavView,totalDownMassView,totalUpDeltavView,
@@ -30,7 +30,8 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
     public RocketStageViewHolder(@NonNull View itemView) {
         super(itemView);
         //decimalFormat.
-        deltavFormat.setMaximumFractionDigits(0);
+        app=App.getInstance();
+        app.deltavFormat.setMaximumFractionDigits(0);
 
         massView =itemView.findViewById(R.id.rocketStageGroupMassView);
         deltavView =itemView.findViewById(R.id.rocketStageGroupDeltavView);
@@ -56,13 +57,13 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
         double mass=rocketStage.getFullMass();
         massView.setText(this.decimalFormat.format(mass));
         double deltav=rocketStage.getDeltaV();
-        deltavView.setText(this.deltavFormat.format(deltav));
+        deltavView.setText(app.deltavFormat.format(deltav));
         double deltavUpThrough=rocket.getDeltaVUpThrough(i);
-        totalUpDeltavView.setText(this.deltavFormat.format(deltavUpThrough));
+        totalUpDeltavView.setText(app.deltavFormat.format(deltavUpThrough));
         double massUpThrough=rocket.getMassUpThrough(i);
         totalUpMassView.setText(this.decimalFormat.format(massUpThrough));
         double deltavDownThrough=rocket.getDeltaVDownThrough(i);
-        totalDownDeltavView.setText(this.deltavFormat.format(deltavDownThrough));
+        totalDownDeltavView.setText(app.deltavFormat.format(deltavDownThrough));
         double massDownThrough=rocket.getMassDownThrough(i);
         totalDownMassView.setText(this.decimalFormat.format(massDownThrough));
         nameView.setText(String.format(" %s",rocketStage.name));

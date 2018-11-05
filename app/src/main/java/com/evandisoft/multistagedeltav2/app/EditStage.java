@@ -91,7 +91,7 @@ public class EditStage extends AppCompatActivity {
         dryMassEdit.setText(this.decimalFormat.format(rocketStage.getDryMass()));
         ispEdit.setText(this.decimalFormat.format(rocketStage.getIsp()));
         stageNameAutoComplete.setText(rocketStage.name);
-        deltavView.setText(this.decimalFormat.format(rocketStage.getDeltaV()));
+        deltavView.setText(app.deltavFormat.format(rocketStage.getDeltaV()));
     }
 
     public void stageSaveOnClick(View view) {

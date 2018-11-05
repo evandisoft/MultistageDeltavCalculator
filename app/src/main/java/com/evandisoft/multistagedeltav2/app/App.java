@@ -1,8 +1,10 @@
 package com.evandisoft.multistagedeltav2.app;
 
+import java.text.DecimalFormat;
+
 public class App {
     private static App instance;
-    Rocket rocket;
+
 
     static App getInstance(){
         if(instance==null){
@@ -16,7 +18,11 @@ public class App {
         return instance!=null;
     }
 
+    DecimalFormat deltavFormat=new DecimalFormat();
+    Rocket rocket;
+
     private App(){
         rocket=new Rocket();
+        deltavFormat.setMaximumFractionDigits(0);
     }
 }
