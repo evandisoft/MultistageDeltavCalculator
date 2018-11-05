@@ -17,21 +17,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="1" />
+            tools:text="1" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text=": " />
+            android:text="@string/colonSpace" />
 
         <TextView
             android:id="@+id/rocketStageGroupStageNameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Lander" />
+            tools:text="Lander" />
 
     </LinearLayout>
 
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:gravity="end"
-                    android:text="Mass (t)" />
+                    android:text="@string/mass_t" />
 
                 <Space
                     android:layout_width="10sp"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:gravity="end"
-                    android:text="Deltav (m/s)" />
+                    android:text="@string/deltav_m_s" />
 
             </TableRow>
 
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_weight="0"
-                    android:text="Stage " />
+                    android:text="@string/stageSpace" />
 
                 <Space android:layout_height="wrap_content" />
 
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="TextView" />
+                    tools:text="20" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="TextView" />
+                    tools:text="100" />
 
             </TableRow>
 
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="Total Down"
+                    android:text="@string/total_down"
                     app:autoSizeMinTextSize="10sp" />
 
                 <Space
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="TextView" />
+                    tools:text="200" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="TextView" />
+                    tools:text="300" />
 
             </TableRow>
 
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="Total Up"
+                    android:text="@string/total_up"
                     app:autoSizeMinTextSize="10sp" />
 
                 <Space
@@ -178,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="TextView" />
+                    tools:text="100" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="TextView" />
+                    tools:text="150" />
             </TableRow>
 
             <TableRow

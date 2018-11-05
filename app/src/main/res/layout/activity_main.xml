@@ -131,7 +131,8 @@
                 android:focusable="true"
                 android:hint="@string/addStageAtIndexHint"
                 android:inputType="numberSigned"
-                android:selectAllOnFocus="true"/>
+                android:selectAllOnFocus="true"
+                android:autofillHints="" tools:targetApi="o"/>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

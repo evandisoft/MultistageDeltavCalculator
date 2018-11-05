@@ -2,14 +2,13 @@
     <string name="app_name">Multi Stage Deltav</string>
     <string name="action_settings">Settings</string>
     <string name="load">Load</string>
-    <string name="deltav_m_s">DeltaV (m/s)</string>
+    <string name="deltav_m_s">Deltav (m/s)</string>
     <string name="isp">Isp</string>
     <string name="save">Save</string>
     <string name="update">Update</string>
     <string name="clear">Clear</string>
     <string name="dry_mass_t">Dry Mass (t)</string>
     <string name="full_mass_t">Full Mass (t)</string>
-    <string name="DefaultRocketName"></string>
     <string name="name_of_rocket">Name of Rocket</string>
     <string name="newButtonText">New</string>
     <string name="clearButtonText">Clear</string>
@@ -35,4 +34,12 @@
     <string name="deleteButtonText">X</string>
     <string name="default_stage_name">Default Stage Name</string>
     <string name="default_rocket_name">Default Rocket Name</string>
+    <string name="doneButtonString">DONE</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="colonSpace">:</string>
+    <string name="mass_t">Mass (t)</string>
+    <string name="stageSpace">Stage</string>
+    <string name="total_down">Total Down</string>
+    <string name="total_up">Total Up</string>
 </resources>

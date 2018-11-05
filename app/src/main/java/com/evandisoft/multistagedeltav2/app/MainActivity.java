@@ -1,5 +1,6 @@
 package com.evandisoft.multistagedeltav2.app;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     App app;
     boolean firstStartup;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         this.rocket=app.rocket;
 
         rocketNameTextField = findViewById(R.id.rocketNameTextField);
-        this.rocketNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
+        this.rocketNameAutoTextAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
 
         rocketNameTextField.setAdapter(rocketNameAutoTextAdapter);
         rocketNameTextField.setThreshold(1);
@@ -176,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
     public void onNewButtonClicked(View view) {
         this.rocket.clear();
         this.rocket.add(new RocketStage());
-        this.rocketNameTextField.setText(getString(R.string.DefaultRocketName));
+        this.rocketNameTextField.setText(getString(R.string.default_rocket_name));
         this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
