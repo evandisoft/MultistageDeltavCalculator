@@ -5,29 +5,37 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 class RocketStageViewHolder extends RecyclerView.ViewHolder {
-    private DecimalFormat decimalFormat = new DecimalFormat();
-    App app;
+    private final DecimalFormat decimalFormat = new DecimalFormat();
+    private final App app;
 
 
-    private TextView massView,deltavView,totalDownDeltavView,totalDownMassView,totalUpDeltavView,
-            totalUpMassView,nameView,stageNumberView;
-    TableLayout tableLayout;
+    private final TextView massView;
+    private final TextView deltavView;
+    private final TextView totalDownDeltavView;
+    private final TextView totalDownMassView;
+    private final TextView totalUpDeltavView;
+    private final TextView totalUpMassView;
+    private final TextView nameView;
+    private final TextView stageNumberView;
+    private final TableLayout tableLayout;
 
-    private TableRow titleRow,stageRow,totalUpRow,totalDownRow;
+//    private final TableRow titleRow;
+//    private final TableRow stageRow;
+//    private final TableRow totalUpRow;
+//    private final TableRow totalDownRow;
 
-    private Button removeStageButton;
+    private final Button removeStageButton;
 
-    HorizontalScrollView rocketStageGroupScroll;
+    // --Commented out by Inspection (11/4/18 11:36 PM):HorizontalScrollView rocketStageGroupScroll;
 
-    public RocketStageViewHolder(@NonNull View itemView) {
+    RocketStageViewHolder(@NonNull View itemView) {
         super(itemView);
         //decimalFormat.
         app=App.getInstance();
@@ -43,10 +51,10 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
         stageNumberView =itemView.findViewById(R.id.rocketStageGroupStageNumber);
         removeStageButton=itemView.findViewById(R.id.rocketStageGroupRemoveButton);
         tableLayout=itemView.findViewById(R.id.rocketStageGroupTableLayout);
-        titleRow=itemView.findViewById(R.id.rocketStageGroupTitleRow);
-        stageRow=itemView.findViewById(R.id.rocketStageGroupStageRow);
-        totalUpRow=itemView.findViewById(R.id.rocketStageGroupTotalUpRow);
-        totalDownRow=itemView.findViewById(R.id.rocketStageGroupTotalDownRow);
+//        titleRow=itemView.findViewById(R.id.rocketStageGroupTitleRow);
+//        stageRow=itemView.findViewById(R.id.rocketStageGroupStageRow);
+//        totalUpRow=itemView.findViewById(R.id.rocketStageGroupTotalUpRow);
+//        totalDownRow=itemView.findViewById(R.id.rocketStageGroupTotalDownRow);
 
         //rocketStageGroupScroll =itemView.findViewById(R.id.rocketStageGroupScroll);
         //rocketStageGroupScroll.setClickable(true);
@@ -66,8 +74,8 @@ class RocketStageViewHolder extends RecyclerView.ViewHolder {
         totalDownDeltavView.setText(app.deltavFormat.format(deltavDownThrough));
         double massDownThrough=rocket.getMassDownThrough(i);
         totalDownMassView.setText(this.decimalFormat.format(massDownThrough));
-        nameView.setText(String.format(" %s",rocketStage.name));
-        stageNumberView.setText(String.format(" %d",i));
+        nameView.setText(String.format(Locale.getDefault()," %s",rocketStage.name));
+        stageNumberView.setText(String.format(Locale.getDefault()," %d",i));
 
 
 //        TableRow[] setVisibleRows={titleRow,stageRow,totalUpRow,totalDownRow};

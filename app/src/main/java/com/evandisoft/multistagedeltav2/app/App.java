@@ -2,7 +2,7 @@ package com.evandisoft.multistagedeltav2.app;
 
 import java.text.DecimalFormat;
 
-public class App {
+class App {
     private static App instance;
 
 
@@ -14,12 +14,12 @@ public class App {
         return instance;
     }
 
-    static public boolean instanciated(){
+    static boolean instantiated(){
         return instance!=null;
     }
 
-    DecimalFormat deltavFormat=new DecimalFormat();
-    Rocket rocket;
+    final DecimalFormat deltavFormat=new DecimalFormat();
+    final Rocket rocket;
 
     private App(){
         rocket=new Rocket();

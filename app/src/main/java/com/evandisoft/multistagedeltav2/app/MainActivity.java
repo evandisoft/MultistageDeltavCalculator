@@ -19,17 +19,16 @@ import com.evandisoft.saneandroidutils.lib.FileIO;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
-    TextView addIndexTextField;
-    RadioGroup addStageGroup;
-    RecyclerView rocketStagesRecyclerView;
-    RocketStagesRecyclerAdapter rocketStagesRecyclerAdapter;
-    RecyclerView.LayoutManager rocketStagesRecyclerLayoutManager;
-    Rocket rocket;
-    AutoCompleteTextView rocketNameTextField;
+    private TextView addIndexTextField;
+    private RadioGroup addStageGroup;
+    private RocketStagesRecyclerAdapter rocketStagesRecyclerAdapter;
+    private RecyclerView.LayoutManager rocketStagesRecyclerLayoutManager;
+    private Rocket rocket;
+    private AutoCompleteTextView rocketNameTextField;
     //RocketStagesAdapter rocketStagesAdapter;
-    ArrayAdapter<String> rocketNameAutoTextAdapter;
-    App app;
-    boolean firstStartup;
+    private ArrayAdapter<String> rocketNameAutoTextAdapter;
+    private App app;
+    private boolean firstStartup;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        firstStartup=!App.instanciated();
+        firstStartup=!App.instantiated();
         app=App.getInstance();
         this.rocket=app.rocket;
 
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         rocketStagesRecyclerAdapter=new RocketStagesRecyclerAdapter(rocket,this);
         rocketStagesRecyclerLayoutManager =new LinearLayoutManager(this);
-        rocketStagesRecyclerView =findViewById(R.id.rocketStagesRecyclerView);
+        RecyclerView rocketStagesRecyclerView = findViewById(R.id.rocketStagesRecyclerView);
         rocketStagesRecyclerView.setLayoutManager(rocketStagesRecyclerLayoutManager);
         rocketStagesRecyclerView.setAdapter(rocketStagesRecyclerAdapter);
 
@@ -81,13 +80,15 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
-    public void onUpdateButtonClicked(View view) {
-        try {
-            this.rocket.calculateRocketCharacteristics();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+// --Commented out by Inspection START (11/4/18 11:35 PM):
+//    public void onUpdateButtonClicked(View view) {
+//        try {
+//            this.rocket.calculateRocketCharacteristics();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+// --Commented out by Inspection STOP (11/4/18 11:35 PM)
 
     public void onAddStageClick(View view) {
         String stageName=getResources().getString(R.string.default_stage_name);
@@ -132,11 +133,11 @@ public class MainActivity extends AppCompatActivity {
         autosave();
     }
 
-    public void autosave() {
+    private void autosave() {
         FileIO.writeStringToFile(this, "autosave.json", this.rocket.toString());
     }
 
-    public void autoload() {
+    private void autoload() {
         String string = FileIO.readStringFromFile(this, "autosave.json");
         if (string != null) {
             this.rocket.fromString(string);
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         this.rocketStagesRecyclerAdapter.notifyDataSetChanged();
     }
 
-    public void loadAutoComplete() {
+    private void loadAutoComplete() {
         File[] appFiles = FileIO.getAppFiles(this);
 
         this.rocketNameAutoTextAdapter.clear();
@@ -192,9 +193,5 @@ public class MainActivity extends AppCompatActivity {
                 this.rocketNameAutoTextAdapter.add(name.replace("rocket_", ""));
             }
         }
-    }
-
-    public void testFun33(View view) {
-        int a=3;
     }
 }

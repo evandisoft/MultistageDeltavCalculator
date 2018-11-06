@@ -1,5 +1,6 @@
 package com.evandisoft.multistagedeltav2.app;
 
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 
@@ -7,29 +8,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 class RocketStage {
-    private static final float standardGravity = 9.80665f;
-    private Rocket container;
+    private static final double standardGravity = 9.80665d;
+    //private Rocket container;
     private double deltaV;
     private double dryMass;
-    public TextWatcher dryMassWatcher;
+    final TextWatcher dryMassWatcher;
     private double fullMass;
-    public TextWatcher fullMassWatcher;
+    final TextWatcher fullMassWatcher;
     private double isp;
-    public TextWatcher ispWatcher;
+    final TextWatcher ispWatcher;
     public String name;
-    public TextWatcher nameWatcher;
+    final TextWatcher nameWatcher;
     private RocketStage parent;
 
 
-    protected void setContainer(Rocket container) {
-        this.container = container;
-    }
+//    void setContainer(Rocket container) {
+//        this.container = container;
+//    }
 
-    public double getFullMass() {
+    double getFullMass() {
         return this.fullMass;
     }
 
-    public double getDryMass() {
+    double getDryMass() {
         return this.dryMass;
     }
 
@@ -37,38 +38,43 @@ class RocketStage {
         return this.isp;
     }
 
-    public double getDeltaV() {
+    double getDeltaV() {
         return this.deltaV;
     }
 
-    protected void setParent(RocketStage parent) {
+    void setParent(RocketStage parent) {
         this.parent = parent;
     }
 
-    public void setFullMass(double fullMass) {
-        this.fullMass = fullMass;
-        calculateDeltaV();
-    }
-
-    public void setDryMass(double dryMass) {
-        this.dryMass = dryMass;
-        calculateDeltaV();
-    }
+//    public void setFullMass(double fullMass) {
+//// --Commented out by Inspection START (11/4/18 11:37 PM):
+// --Commented out by Inspection START (11/4/18 11:37 PM):
+//// --Commented out by Inspection STOP (11/4/18 11:37 PM)
+////        this.fullMass = fullMass;
+// --Commented out by Inspection STOP (11/4/18 11:37 PM)
+//        calculateDeltaV();
+//    }
+//
+//    public void setDryMass(double dryMass) {
+//        this.dryMass = dryMass;
+// --Commented out by Inspection STOP (11/4/18 11:37 PM)
+//        calculateDeltaV();
+//    }
 
     public void setIsp(double isp) {
         this.isp = isp;
         calculateDeltaV();
     }
 
-    public RocketStage(String stageName) {
+    RocketStage(String stageName) {
         this(stageName, 0.0d, 0.0d, 0.0d);
     }
 
-    public RocketStage() {
+    RocketStage() {
         this("", 0.0d, 0.0d, 0.0d);
     }
 
-    public RocketStage(String name, double fullMass, double dryMass, double isp) {
+    private RocketStage(String name, double fullMass, double dryMass, double isp) {
         this.name = "";
         this.parent = null;
         this.nameWatcher = new TextWatcher() {
@@ -140,7 +146,7 @@ class RocketStage {
         calculateDeltaV();
     }
 
-    public double effectiveFullMass() {
+    double effectiveFullMass() {
         double mass = this.fullMass;
         if (this.parent != null) {
             return mass + this.parent.effectiveFullMass();
@@ -148,7 +154,7 @@ class RocketStage {
         return mass;
     }
 
-    public double effectiveDryMass() {
+    private double effectiveDryMass() {
         double mass = this.dryMass;
         if (this.parent != null) {
             return mass + this.parent.effectiveFullMass();
@@ -156,17 +162,17 @@ class RocketStage {
         return mass;
     }
 
-    protected void calculateDeltaV() {
+    void calculateDeltaV() {
         double deltaV;
         if (this.fullMass == 0.0d || this.dryMass == 0.0d || this.isp == 0.0d) {
             deltaV = 0.0d;
         } else {
-            deltaV = (this.isp * 9.806650161743164d) * Math.log(effectiveFullMass() / effectiveDryMass());
+            deltaV = (this.isp * standardGravity) * Math.log(effectiveFullMass() / effectiveDryMass());
         }
         this.deltaV = deltaV;
     }
 
-    public void copyValues(RocketStage rocketStage) {
+    private void copyValues(RocketStage rocketStage) {
         this.name = rocketStage.name;
         this.fullMass = rocketStage.fullMass;
         this.dryMass = rocketStage.dryMass;
@@ -177,7 +183,7 @@ class RocketStage {
         return new RocketStage(jsonObject.optString("name"), jsonObject.optDouble("fullMass"), jsonObject.optDouble("dryMass"), jsonObject.optDouble("isp"));
     }
 
-    public void fromString(String string) {
+    void fromString(String string) {
         try {
             copyValues(fromJSON(new JSONObject(string)));
         } catch (JSONException e) {
@@ -185,16 +191,18 @@ class RocketStage {
         }
     }
 
+    @NonNull
     public String toString() {
         try {
             return toJSON().toString(2);
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            //return null;
         }
+        return "";
     }
 
-    public JSONObject toJSON() {
+    JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("name", this.name);

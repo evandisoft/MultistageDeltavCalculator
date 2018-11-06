@@ -18,32 +18,31 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 public class EditStage extends AppCompatActivity {
-    private DecimalFormat decimalFormat = new DecimalFormat();
+    private final DecimalFormat decimalFormat = new DecimalFormat();
 
-    Intent thisIntent;
-    int stageNumber;
-    RocketStage rocketStage;
-    EditText fullMassEdit;
-    EditText dryMassEdit;
-    EditText ispEdit;
-    TextView deltavView;
-    AutoCompleteTextView stageNameAutoComplete;
-    Rocket rocket;
-    App app;
-    private ArrayAdapter stageNameAutoTextAdapter;
+    private int stageNumber;
+    private RocketStage rocketStage;
+    private EditText fullMassEdit;
+    private EditText dryMassEdit;
+    private EditText ispEdit;
+    private TextView deltavView;
+    private AutoCompleteTextView stageNameAutoComplete;
+    private Rocket rocket;
+    private App app;
+    private ArrayAdapter<String> stageNameAutoTextAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_stage);
 
-        this.stageNameAutoTextAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
+        this.stageNameAutoTextAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
 
 
         app=App.getInstance();
 
-        thisIntent=getIntent();
-        stageNumber=thisIntent.getIntExtra("stageNumber",-1);
+        Intent thisIntent = getIntent();
+        stageNumber= thisIntent.getIntExtra("stageNumber",-1);
         if ((stageNumber == -1)) throw new AssertionError();
 
         rocket=app.rocket;
@@ -74,7 +73,7 @@ public class EditStage extends AppCompatActivity {
         loadAutoComplete();
     }
 
-    public void loadAutoComplete() {
+    private void loadAutoComplete() {
         File[] appFiles = FileIO.getAppFiles(this);
 
         this.stageNameAutoTextAdapter.clear();
@@ -131,7 +130,7 @@ public class EditStage extends AppCompatActivity {
         this.finish();
     }
 
-    public static void hideKeyboard(Activity activity) {
+    private static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
         View view = activity.getCurrentFocus();

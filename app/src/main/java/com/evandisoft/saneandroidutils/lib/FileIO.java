@@ -28,6 +28,7 @@ public class FileIO {
         try {
             FileInputStream fileInputStream = context.openFileInput(filename);
             byte[] buffer = new byte[((int) new File(context.getFilesDir(), filename).length())];
+
             fileInputStream.read(buffer);
             fileInputStream.close();
             return new String(buffer);

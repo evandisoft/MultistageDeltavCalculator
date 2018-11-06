@@ -1,5 +1,6 @@
 package com.evandisoft.multistagedeltav2.app;
 
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 
@@ -14,23 +15,25 @@ class Rocket extends ArrayList<RocketStage> {
     private double deltaV;
     private double mass;
     public String name;
-    public TextWatcher nameWatcher;
+    final TextWatcher nameWatcher;
     //public RocketStagesAdapter rsa;
     //public RocketStagesRecyclerAdapter rocketStagesRecyclerAdapter;
 
-    public double getDeltaV() {
-        return this.deltaV;
-    }
+// --Commented out by Inspection START (11/4/18 11:35 PM):
+//    public double getDeltaV() {
+//        return this.deltaV;
+//    }
+// --Commented out by Inspection STOP (11/4/18 11:35 PM)
 
     public double getMass() {
         return this.mass;
     }
 
-    public Rocket() {
+    Rocket() {
         this("Default Rocket Name");
     }
 
-    public Rocket(String name) {
+    private Rocket(String name) {
         this.name = "";
         this.deltaV = 0.0d;
         this.mass = 0.0d;
@@ -61,13 +64,13 @@ class Rocket extends ArrayList<RocketStage> {
 
     public void add(int index, RocketStage rocketStage) {
         index = Math.min(Math.max(index, 0), size());
-        rocketStage.setContainer(this);
+        //rocketStage.setContainer(this);
         super.add(index, rocketStage);
         if (size() - index > 1) {
-            ((RocketStage) get(index + 1)).setParent(rocketStage);
+            get(index + 1).setParent(rocketStage);
         }
         if (index > 0) {
-            rocketStage.setParent((RocketStage) get(index - 1));
+            rocketStage.setParent(get(index - 1));
         }
         calculateRocketCharacteristics();
     }
@@ -79,53 +82,52 @@ class Rocket extends ArrayList<RocketStage> {
         }
         RocketStage parent = null;
         if (index - 1 >= 0) {
-            parent = (RocketStage) get(index - 1);
+            parent = get(index - 1);
         }
         if (index + 1 < size()) {
-            ((RocketStage) get(index + 1)).setParent(parent);
+            get(index + 1).setParent(parent);
         }
-        RocketStage prev = (RocketStage) super.remove(index);
+        RocketStage prev = super.remove(index);
         calculateRocketCharacteristics();
         return prev;
     }
 
-    public double getMassDownThrough(int index) {
+    double getMassDownThrough(int index) {
         double mass = 0.0d;
         for (int i = 0; i <= index; i++) {
-            mass += ((RocketStage) get(i)).getFullMass();
+            mass += get(i).getFullMass();
         }
         return mass;
     }
 
-    public double getMassUpThrough(int index) {
+    double getMassUpThrough(int index) {
         double mass = 0.0d;
         for (int i = this.size()-1; i >= index; i--) {
-            mass += ((RocketStage) get(i)).getFullMass();
+            mass += get(i).getFullMass();
         }
         return mass;
     }
 
-    public double getDeltaVDownThrough(int index) {
+    double getDeltaVDownThrough(int index) {
         double deltaV = 0.0d;
         for (int i = 0; i <= index; i++) {
-            deltaV += ((RocketStage) get(i)).getDeltaV();
+            deltaV += get(i).getDeltaV();
         }
         return deltaV;
     }
 
-    public double getDeltaVUpThrough(int index) {
+    double getDeltaVUpThrough(int index) {
         double deltaV = 0.0d;
         for (int i = this.size()-1; i >= index; i--) {
-            deltaV += ((RocketStage) get(i)).getDeltaV();
+            deltaV += get(i).getDeltaV();
         }
         return deltaV;
     }
 
     private void sumDeltaV() {
         double deltaV = 0.0d;
-        Iterator it = iterator();
-        while (it.hasNext()) {
-            deltaV += ((RocketStage) it.next()).getDeltaV();
+        for (RocketStage rocketStage : this) {
+            deltaV += rocketStage.getDeltaV();
         }
         this.deltaV = deltaV;
     }
@@ -134,27 +136,26 @@ class Rocket extends ArrayList<RocketStage> {
         if (isEmpty()) {
             this.mass = 0.0d;
         } else {
-            this.mass = ((RocketStage) get(size() - 1)).effectiveFullMass();
+            this.mass = get(size() - 1).effectiveFullMass();
         }
     }
 
-    public void calculateRocketCharacteristics() {
+    void calculateRocketCharacteristics() {
         for (int i = 0; i < size(); i++) {
-            ((RocketStage) get(i)).calculateDeltaV();
+            get(i).calculateDeltaV();
         }
         sumMass();
         sumDeltaV();
     }
 
-    public JSONObject toJSON() {
+    private JSONObject toJSON() {
         JSONObject mainObject = new JSONObject();
         try {
             mainObject.put("name", this.name);
             mainObject.put("length", size());
             JSONArray jsonArray = new JSONArray();
-            Iterator it = iterator();
-            while (it.hasNext()) {
-                jsonArray.put(((RocketStage) it.next()).toJSON());
+            for (RocketStage rocketStage : this) {
+                jsonArray.put(rocketStage.toJSON());
             }
             mainObject.put("array", jsonArray);
         } catch (JSONException e) {
@@ -163,16 +164,19 @@ class Rocket extends ArrayList<RocketStage> {
         return mainObject;
     }
 
+    @NonNull
     public String toString() {
         try {
             return toJSON().toString(2);
         } catch (JSONException e) {
             e.printStackTrace();
-            return null;
+            //return null;
         }
+
+        return "";
     }
 
-    public void fromJSON(JSONObject jsonObject) {
+    private void fromJSON(JSONObject jsonObject) {
         clear();
         this.name = jsonObject.optString("name");
         int length = jsonObject.optInt("length");
@@ -187,7 +191,7 @@ class Rocket extends ArrayList<RocketStage> {
         calculateRocketCharacteristics();
     }
 
-    public void fromString(String string) {
+    void fromString(String string) {
         try {
             fromJSON(new JSONObject(string));
         } catch (JSONException e) {

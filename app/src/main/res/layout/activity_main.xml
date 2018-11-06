@@ -34,7 +34,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/newButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,7 +42,6 @@
                 android:text="@string/newButtonText" />
 
             <Button
-                android:id="@+id/clearAllStagesButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -52,7 +50,6 @@
                 android:text="@string/clearButtonText" />
 
             <Button
-                android:id="@+id/saveRocketButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -61,7 +58,6 @@
                 android:text="@string/saveButtonText" />
 
             <Button
-                android:id="@+id/loadRocketButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -76,7 +72,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/addStageButton"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

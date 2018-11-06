@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView.Adapter {
-    MainActivity mainActivity;
-    Rocket rocket;
+    private final MainActivity mainActivity;
+    final Rocket rocket;
 
 
-    public RocketStagesRecyclerAdapter(Rocket rocket,MainActivity mainActivity) {
+    RocketStagesRecyclerAdapter(Rocket rocket, MainActivity mainActivity) {
         this.rocket=rocket;
         this.mainActivity=mainActivity;
     }
@@ -22,9 +22,7 @@ class RocketStagesRecyclerAdapter extends android.support.v7.widget.RecyclerView
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.rocket_stage_group_view, viewGroup, false);
 
-        RocketStageViewHolder vh=new RocketStageViewHolder(v);
-
-        return vh;
+        return new RocketStageViewHolder(v);
     }
 
     @Override
